@@ -1,25 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import Home from './view/Home'
+import * as React from 'react';
+import {BrowserRouter as Router, Routes as Switch, Route} from "react-router-dom";
+import Navbar from "./view/Navbar"
+import Login from "./view/login/Login";
+import DevicesTable from "./view/devices/DevicesTable";
+import DeviceInformation from "./view/devices/DeviceInformation";
+import ProductInformation from "./view/devices/ProductInformation";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+    const basePath = ''
+
+    return (
+        <Router>
+            <Navbar/>
+            <Switch>
+                <Route path={basePath + '/devices'} element={<DevicesTable/>}/>
+                <Route path={basePath + '/devices/:deviceId'} element={<DeviceInformation/>}/>
+                <Route path={basePath + '/products/:productId'} element={<ProductInformation/>}/>
+                <Route path={basePath + '/products'} element={<ProductInformation/>}/>
+                <Route path={basePath + '/login'} element={<Login/>}/>
+                <Route path="*" element={<Home/>}/>
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;
